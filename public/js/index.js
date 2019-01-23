@@ -7,6 +7,7 @@ socket.on('connect', function () {
 	// 	from: 'Jean@example.com',
 	// 	text: 'Hey, this is Jean'
 	// });
+	
 });
 
 socket.on('disconnect', function () {
