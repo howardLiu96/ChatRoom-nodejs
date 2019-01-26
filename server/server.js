@@ -29,7 +29,7 @@ io.on('connection', (socket) => {
 	socket.on('createMessage', (newMsg, callback) => {
 		console.log('createMessage', newMsg);
 		io.emit('newMessage', generateMessage(newMsg.from, newMsg.text));
-		callback('This is from the server.');
+		callback();
 		// socket.broadcast.emit('newMessage', {
 		// 	from: newMsg.from,
 		// 	text: newMsg.text,
