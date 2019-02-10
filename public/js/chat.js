@@ -22,7 +22,7 @@ socket.on('connect', function () {
 	socket.emit('join', params, function (err) {
 		if (err) {
 			alert(err);
-			window.location.href = '/';
+			window.location.href = '/index.html';
 		} else {
 			console.log('No error');
 		}

@@ -3,6 +3,14 @@ const http = require('http');
 const express = require('express');
 const socketIO = require('socket.io');
 
+//db
+const {mongoose} = require('./../db/mongoose');
+var {ObjectID} = require('mongodb');
+
+const _ = require('lodash');
+const bodyParser = require('body-parser');
+
+var {authenticate} = require('./../middleware/authenticate');
 
 const {generateMessage, generateLocationMessage} = require('./utils/message');
 const {isRealString} = require('./utils/validation');
@@ -16,7 +24,20 @@ var server = http.createServer(app);
 var io = socketIO(server);
 var users = new Users();
 
-app.use(express.static(publicPath));
+//app.use(express.static(publicPath));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+
+app.use('/', express.static(publicPath, { index: 'login.html' }));
+app.post('/user/join', (req, res) => {
+	var code = 999;
+	var msg = "Invalid";
+	if (isRealString(req.body.displayName) && isRealString(req.body.roomName)) {
+		code = 100;
+		msg = "Valid";
+	}
+	res.send({code, msg});
+});
 io.on('connection', (socket) => {
 	console.log('New user connected');
 
@@ -27,9 +48,9 @@ io.on('connection', (socket) => {
 	// });
 	socket.on('join', (params, callback) => {
 
-		if (!isRealString(params.name) || !isRealString(params.room)) {
-			callback('Name and room name are required.');
-		}
+		// if (!isRealString(params.name) || !isRealString(params.room)) {
+		// 	callback('Name and room name are required.');
+		// }
 
 		socket.join(params.room);
 		users.removeUser(socket.id);
