@@ -1,3 +1,6 @@
+// configuration includes jwt and port info.
+const config = require('./config/config');
+
 const path = require('path');
 const http = require('http');
 const express = require('express');
@@ -29,6 +32,8 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use('/', express.static(publicPath, { index: 'login.html' }));
+app.use('/user/login', (req, res) => {});
+app.use('/user/signup', (req, res) => {});
 app.post('/user/join', (req, res) => {
 	var code = 999;
 	var msg = "Invalid";
