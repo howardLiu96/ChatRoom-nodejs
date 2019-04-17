@@ -9,7 +9,7 @@ mongoose.Promise = global.Promise;
 // });
 
 // mongoose.connect(process.env.MONGODB_URI);
-mongoose.connect(db.localhost);
+mongoose.connect(db.mlab);
 
 module.exports = {
 	mongoose: mongoose
