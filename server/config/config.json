@@ -1,6 +1,6 @@
 {
     "dev": {
-        "PORT": 3000,
+        
         "JWT_SECRET": "eruosdifuosdjfoa",
         "MONGODB_URI": "ds159164.mlab.com:59164/howard_todo"
     }
